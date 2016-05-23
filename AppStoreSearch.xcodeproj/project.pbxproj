@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC7AC69B1CF1FDCB003F3D9F /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */; };
+		DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */; };
 		DCF6A8D31CE929A20015952A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6A8D21CE929A20015952A /* AppDelegate.swift */; };
 		DCF6A8D51CE929A20015952A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6A8D41CE929A20015952A /* SearchViewController.swift */; };
 		DCF6A8D81CE929A20015952A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCF6A8D61CE929A20015952A /* Main.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		DCF6A8CF1CE929A20015952A /* AppStoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF6A8D21CE929A20015952A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCF6A8D41CE929A20015952A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 				DCF6A8E41CE94C650015952A /* SearchResult.swift */,
 				DCF6A8D61CE929A20015952A /* Main.storyboard */,
 				DCF6A8D91CE929A20015952A /* Assets.xcassets */,
+				DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */,
+				DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */,
 				DCF6A8DB1CE929A20015952A /* LaunchScreen.storyboard */,
 				DCF6A8DE1CE929A20015952A /* Info.plist */,
 			);
@@ -127,6 +133,7 @@
 			files = (
 				DCF6A8DD1CE929A20015952A /* LaunchScreen.storyboard in Resources */,
 				DCF6A8DA1CE929A20015952A /* Assets.xcassets in Resources */,
+				DC7AC69B1CF1FDCB003F3D9F /* SearchResultCell.xib in Resources */,
 				DCF6A8D81CE929A20015952A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +147,7 @@
 			files = (
 				DCF6A8D51CE929A20015952A /* SearchViewController.swift in Sources */,
 				DCF6A8E51CE94C650015952A /* SearchResult.swift in Sources */,
+				DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */,
 				DCF6A8D31CE929A20015952A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +296,7 @@
 				DCF6A8E31CE929A20015952A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

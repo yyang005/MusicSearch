@@ -10,6 +10,8 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
 
+    var searchResults = [searchResult]()
+    
     // MARK: IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +24,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         super.viewDidLoad()
         
         tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        tableView.rowHeight = 80
+        
+        // register nib file for table view cell
+        
+        let newNib = UINib(nibName: "SearchResultCell", bundle: nil)
+        tableView.registerNib(newNib, forCellReuseIdentifier: "SearchResultCell")
+        
     }
     
     // MARK: search bar delegate
@@ -41,7 +50,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "searchResult")
+        let cellReuseIdentifier = "SearchResultCell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! SearchResultCell
+        
+        if searchResults.count == 0 {
+            cell.nameLabel.text = "Nothing Found"
+        }else {
+            let result = searchResults[indexPath.row]
+            cell.nameLabel.text = result.name
+            cell.artistNameLabel.text = result.artistName
+        }
         return cell
     }
 }
