@@ -11,6 +11,7 @@ import UIKit
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
 
     var searchResults = [searchResult]()
+    let searchClient = AppStoreClient.sharedInstance
     
     // MARK: IBOutlets
     
@@ -37,6 +38,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        
+        let term = searchBar.text!
+        searchClient.performSearch(term, entity: nil)
     }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DC7AC69B1CF1FDCB003F3D9F /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */; };
 		DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */; };
+		DCDF5E991CF3DCC000B30CC0 /* AppStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */; };
+		DCDF5E9B1CF3DFEA00B30CC0 /* AppStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF5E9A1CF3DFEA00B30CC0 /* AppStoreConstants.swift */; };
 		DCF6A8D31CE929A20015952A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6A8D21CE929A20015952A /* AppDelegate.swift */; };
 		DCF6A8D51CE929A20015952A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF6A8D41CE929A20015952A /* SearchViewController.swift */; };
 		DCF6A8D81CE929A20015952A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCF6A8D61CE929A20015952A /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 /* Begin PBXFileReference section */
 		DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreClient.swift; sourceTree = "<group>"; };
+		DCDF5E9A1CF3DFEA00B30CC0 /* AppStoreConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreConstants.swift; sourceTree = "<group>"; };
 		DCF6A8CF1CE929A20015952A /* AppStoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCF6A8D21CE929A20015952A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCF6A8D41CE929A20015952A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 			children = (
 				DCF6A8D21CE929A20015952A /* AppDelegate.swift */,
 				DCF6A8D41CE929A20015952A /* SearchViewController.swift */,
+				DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */,
+				DCDF5E9A1CF3DFEA00B30CC0 /* AppStoreConstants.swift */,
 				DCF6A8E41CE94C650015952A /* SearchResult.swift */,
 				DCF6A8D61CE929A20015952A /* Main.storyboard */,
 				DCF6A8D91CE929A20015952A /* Assets.xcassets */,
@@ -146,7 +152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCF6A8D51CE929A20015952A /* SearchViewController.swift in Sources */,
+				DCDF5E9B1CF3DFEA00B30CC0 /* AppStoreConstants.swift in Sources */,
 				DCF6A8E51CE94C650015952A /* SearchResult.swift in Sources */,
+				DCDF5E991CF3DCC000B30CC0 /* AppStoreClient.swift in Sources */,
 				DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */,
 				DCF6A8D31CE929A20015952A /* AppDelegate.swift in Sources */,
 			);
