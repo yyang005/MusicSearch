@@ -10,7 +10,6 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
 
-    var searchResults = [searchResult]()
     let searchClient = AppStoreClient.sharedInstance
     
     // MARK: IBOutlets
@@ -40,7 +39,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar.resignFirstResponder()
         
         let term = searchBar.text!
-        searchClient.performSearch(term, entity: nil)
+        searchClient.performSearch(term, entity: nil) { (error) -> Void in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
+        }
     }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
@@ -50,19 +58,33 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     // MARK: table view data source methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        let searchResults = searchClient.searchResult
+        return searchResults.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellReuseIdentifier = "SearchResultCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! SearchResultCell
         
+        let searchResults = searchClient.searchResult
         if searchResults.count == 0 {
             cell.nameLabel.text = "Nothing Found"
         }else {
             let result = searchResults[indexPath.row]
             cell.nameLabel.text = result.name
             cell.artistNameLabel.text = result.artistName
+            
+            let url = NSURL(string: result.artworkURL60)!
+            searchClient.taskForImage(url, downloadImageCompletionHandler: { (data, error) -> Void in
+                guard error == nil else {
+                    print(error)
+                    return
+                }
+                let image = UIImage(data: data!)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    cell.artworkImageView.image = image
+                })
+            })
         }
         return cell
     }
