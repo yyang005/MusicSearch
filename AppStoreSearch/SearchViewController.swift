@@ -12,18 +12,51 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
 
     let searchClient = AppStoreClient.sharedInstance
     
-    // MARK: IBOutlets
+    // MARK: IBOutlets and IBActions
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
+    @IBAction func segmentChanged(sender: UISegmentedControl) {
+        let term = searchBar.text!
+        if term == "" {
+            return
+        }
+
+        let entityName = entityFromIndex(sender.selectedSegmentIndex)
+        searchClient.performSearch(term, entity: entityName) { (error) -> Void in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    func entityFromIndex(index: Int) -> String?{
+        var entityName: String?
+        switch index {
+            case 1: entityName = "musicTrack"
+            case 2: entityName = "software"
+            case 3: entityName = "ebook"
+            default: break
+        }
+        return entityName
+    }
     
     // MARK: life cycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
         tableView.rowHeight = 80
         
         // register nib file for table view cell

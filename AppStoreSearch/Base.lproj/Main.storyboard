@@ -32,26 +32,51 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ubh-f1-f1O"/>
                                 </connections>
                             </searchBar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NlZ-ba-fHe">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <items>
+                                    <navigationItem id="yoi-ze-4QW">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="zSO-0d-IJk">
+                                            <rect key="frame" x="150" y="7" width="300" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="All"/>
+                                                <segment title="Music"/>
+                                                <segment title="Software"/>
+                                                <segment title="E-books"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pjN-3O-Ifa"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NlZ-ba-fHe" secondAttribute="trailing" id="38h-kB-M1y"/>
+                            <constraint firstItem="NlZ-ba-fHe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8ez-sT-XnV"/>
                             <constraint firstItem="faO-rm-WI1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="GQb-ww-dNN"/>
                             <constraint firstAttribute="trailing" secondItem="N1C-xJ-cIy" secondAttribute="trailing" id="IHt-Ra-3Cn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="N1C-xJ-cIy" secondAttribute="bottom" constant="8" id="Pwa-iO-taL"/>
                             <constraint firstAttribute="trailing" secondItem="faO-rm-WI1" secondAttribute="trailing" id="Tzv-gN-KF0"/>
                             <constraint firstItem="N1C-xJ-cIy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="V0I-HF-OH0"/>
+                            <constraint firstItem="NlZ-ba-fHe" firstAttribute="top" secondItem="faO-rm-WI1" secondAttribute="bottom" id="fkv-hu-LEQ"/>
                             <constraint firstItem="faO-rm-WI1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hBX-oM-8FD"/>
                             <constraint firstItem="N1C-xJ-cIy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ijI-NU-nZD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="faO-rm-WI1" id="wem-h6-UUO"/>
+                        <outlet property="segmentedControl" destination="zSO-0d-IJk" id="LAG-03-dQN"/>
                         <outlet property="tableView" destination="N1C-xJ-cIy" id="iLd-Wu-ahY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="381"/>
+            <point key="canvasLocation" x="474" y="358"/>
         </scene>
     </scenes>
 </document>

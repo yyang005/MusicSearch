@@ -14,6 +14,7 @@ class AppStoreClient {
     static let sharedInstance = AppStoreClient()
 
     func performSearch(term: String, entity: String?, searchCompletionHandler: (error: String?) -> Void){
+        searchResult = [SearchResult]()
         var method = [AppStoreClient.ParametersKey.SearchTerm: term]
         if entity != nil {
             method[AppStoreClient.ParametersKey.Entity] = entity
@@ -58,7 +59,6 @@ class AppStoreClient {
     
     func taskForGetMethod(method: [String: String], completionHandlerForGet: (results: AnyObject?, error: String?) -> Void) -> NSURLSessionDataTask{
         let url = urlFromMethod(method)
-        print(url)
         
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
