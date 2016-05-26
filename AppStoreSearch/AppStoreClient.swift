@@ -51,6 +51,9 @@ class AppStoreClient {
                 }
                 searchResult.append(result)
             }
+            searchResult.sortInPlace({ (result1, result2) -> Bool in
+                return result1.name.localizedCompare(result2.name) == .OrderedAscending
+            })
         }else{
             print("cannot find the key: results")
         }
