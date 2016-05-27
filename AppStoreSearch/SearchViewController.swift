@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     let searchClient = AppStoreClient.sharedInstance
     
@@ -121,5 +121,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         }
         return cell
     }
+    
+    // MARK: table view delegate methods
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        performSegueWithIdentifier("ShowDetail", sender: indexPath)
+    }
+    
+    
 }
 

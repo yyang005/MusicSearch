@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC640CAD1CF7C189006029C0 /* DimPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC640CAC1CF7C189006029C0 /* DimPresentationViewController.swift */; };
+		DC640CAF1CF7C355006029C0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC640CAE1CF7C355006029C0 /* DetailViewController.swift */; };
 		DC7AC69B1CF1FDCB003F3D9F /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */; };
 		DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */; };
 		DCDF5E991CF3DCC000B30CC0 /* AppStoreClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC640CAC1CF7C189006029C0 /* DimPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimPresentationViewController.swift; sourceTree = "<group>"; };
+		DC640CAE1CF7C355006029C0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DC7AC69A1CF1FDCB003F3D9F /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		DC7AC69C1CF2067A003F3D9F /* SearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreClient.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 				DCF6A8D21CE929A20015952A /* AppDelegate.swift */,
 				DCF6A8D41CE929A20015952A /* SearchViewController.swift */,
 				DCDF5E981CF3DCC000B30CC0 /* AppStoreClient.swift */,
+				DC640CAC1CF7C189006029C0 /* DimPresentationViewController.swift */,
+				DC640CAE1CF7C355006029C0 /* DetailViewController.swift */,
 				DCDF5E9A1CF3DFEA00B30CC0 /* AppStoreConstants.swift */,
 				DCF6A8E41CE94C650015952A /* SearchResult.swift */,
 				DCF6A8D61CE929A20015952A /* Main.storyboard */,
@@ -153,10 +159,12 @@
 			files = (
 				DCF6A8D51CE929A20015952A /* SearchViewController.swift in Sources */,
 				DCDF5E9B1CF3DFEA00B30CC0 /* AppStoreConstants.swift in Sources */,
+				DC640CAD1CF7C189006029C0 /* DimPresentationViewController.swift in Sources */,
 				DCF6A8E51CE94C650015952A /* SearchResult.swift in Sources */,
 				DCDF5E991CF3DCC000B30CC0 /* AppStoreClient.swift in Sources */,
 				DC7AC69D1CF2067A003F3D9F /* SearchResultCell.swift in Sources */,
 				DCF6A8D31CE929A20015952A /* AppDelegate.swift in Sources */,
+				DC640CAF1CF7C355006029C0 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
