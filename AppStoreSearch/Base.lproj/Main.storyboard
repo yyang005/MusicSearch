@@ -87,11 +87,11 @@
                         <viewControllerLayoutGuide type="top" id="4Fv-Gk-RWl"/>
                         <viewControllerLayoutGuide type="bottom" id="PjM-u4-eyn"/>
                     </layoutGuides>
-                    <view key="view" alpha="0.5" contentMode="scaleToFill" id="aK8-0s-zYG">
+                    <view key="view" contentMode="scaleToFill" id="aK8-0s-zYG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tct-a9-Cdc" userLabel="Pop-up View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tct-a9-Cdc" userLabel="Pop-up View">
                                 <rect key="frame" x="180" y="180" width="240" height="240"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gef-6x-k24" userLabel="Close Button">
@@ -102,14 +102,14 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.94866467198581561" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="UZf-y9-dt2"/>
                                     <constraint firstAttribute="width" constant="240" id="pzI-Kb-BrG"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tct-a9-Cdc" firstAttribute="centerX" secondItem="aK8-0s-zYG" secondAttribute="centerX" id="KgM-kS-Xin"/>
                             <constraint firstItem="tct-a9-Cdc" firstAttribute="centerY" secondItem="aK8-0s-zYG" secondAttribute="centerY" id="PxV-Qv-pVb"/>
