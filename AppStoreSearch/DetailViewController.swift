@@ -26,6 +26,14 @@ class DetailViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func openURL() {
+        if let url = NSURL(string: searchResult.storeURL) {
+            if UIApplication.sharedApplication().canOpenURL(url){
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+    }
+    
     func close() {
         dismissViewControllerAnimated(true, completion: nil)
     }

@@ -148,6 +148,9 @@
                                                 <exclude reference="sDZ-mE-46r"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="openURL" destination="Jgz-29-ftS" eventType="touchUpInside" id="aGn-Mi-jgf"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="kind value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFz-0y-f52">
                                         <rect key="frame" x="70" y="165" width="160" height="21"/>
