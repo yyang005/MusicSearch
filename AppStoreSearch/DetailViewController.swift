@@ -9,6 +9,8 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    var searchResult: SearchResult!
 
     // MARK: IBOutlets and IBAction
     
@@ -18,6 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var kindLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var priceButton: UIButton!
     
     @IBAction func close(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -33,6 +36,8 @@ class DetailViewController: UIViewController {
         transitioningDelegate = self
     }
     
+    // MARK: life cycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +47,37 @@ class DetailViewController: UIViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: "close")
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
+        
+        if let _ = searchResult {
+            updateUI()
+        }
+    }
+    
+    // MARk: update UI
+    
+    func updateUI() {
+        nameLabel.text = searchResult.name
+        if searchResult.artistName.isEmpty {
+            artistNameLabel.text = "Unknown"
+        }else {
+            artistNameLabel.text = searchResult.artistName
+        }
+        kindLabel.text = searchResult.kind
+        genreLabel.text = searchResult.genre
+        
+        // format price display
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        formatter.currencyCode = searchResult.currency
+        
+        var priceText: String = ""
+        if searchResult.price == 0 {
+            priceText = "Free"
+        }else if let text = formatter.stringFromNumber(searchResult.price){
+            priceText = text
+        }
+        priceButton.setTitle(priceText, forState: .Normal)
     }
 }
 

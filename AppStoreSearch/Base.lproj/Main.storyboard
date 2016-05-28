@@ -134,9 +134,20 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Eg-02-3bY">
-                                        <rect key="frame" x="168" y="212" width="68" height="24"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Eg-02-3bY">
+                                        <rect key="frame" x="182" y="212" width="41" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="ITA-rR-Zgu"/>
+                                            <constraint firstAttribute="height" constant="24" id="Q20-ad-tpH"/>
+                                            <constraint firstAttribute="height" constant="24" id="sDZ-mE-46r"/>
+                                        </constraints>
                                         <state key="normal" title="$9.99" backgroundImage="PriceButton"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Q20-ad-tpH"/>
+                                                <exclude reference="sDZ-mE-46r"/>
+                                            </mask>
+                                        </variation>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="kind value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFz-0y-f52">
                                         <rect key="frame" x="70" y="165" width="160" height="21"/>
@@ -147,9 +158,23 @@
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.94866467198581561" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="7Eg-02-3bY" secondAttribute="bottom" constant="6" id="FQ7-V5-z9L"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Eg-02-3bY" secondAttribute="bottom" constant="6" id="I5X-p2-NQu"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Eg-02-3bY" secondAttribute="trailing" constant="6" id="RU3-6j-W4P"/>
                                     <constraint firstAttribute="height" constant="240" id="UZf-y9-dt2"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Eg-02-3bY" secondAttribute="trailing" constant="17" id="Wv3-V3-FCZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Eg-02-3bY" secondAttribute="trailing" constant="20" symbolic="YES" id="bJH-LR-Tou"/>
                                     <constraint firstAttribute="width" constant="240" id="pzI-Kb-BrG"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Eg-02-3bY" secondAttribute="bottom" constant="6" id="xW9-PE-XTW"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="FQ7-V5-z9L"/>
+                                        <exclude reference="RU3-6j-W4P"/>
+                                        <exclude reference="bJH-LR-Tou"/>
+                                        <exclude reference="xW9-PE-XTW"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
@@ -173,6 +198,7 @@
                         <outlet property="kindLabel" destination="lFz-0y-f52" id="XH2-vq-Rgg"/>
                         <outlet property="nameLabel" destination="5QR-sq-otq" id="Phd-pV-fCN"/>
                         <outlet property="popupView" destination="tct-a9-Cdc" id="hVE-Dc-biQ"/>
+                        <outlet property="priceButton" destination="7Eg-02-3bY" id="I4l-oz-Tnp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQd-cP-XUH" userLabel="First Responder" sceneMemberID="firstResponder"/>

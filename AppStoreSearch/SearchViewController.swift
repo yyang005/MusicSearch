@@ -129,6 +129,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         performSegueWithIdentifier("ShowDetail", sender: indexPath)
     }
     
+    // MARK: prepare for segue
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            let dest = segue.destinationViewController as! DetailViewController
+            let indexPath = sender as! NSIndexPath
+            dest.searchResult = searchClient.searchResult[indexPath.row]
+        }
+    }
 }
 
