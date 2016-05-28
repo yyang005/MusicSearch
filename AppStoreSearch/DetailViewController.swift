@@ -86,6 +86,22 @@ class DetailViewController: UIViewController {
             priceText = text
         }
         priceButton.setTitle(priceText, forState: .Normal)
+        
+        // load image
+        
+        let searchClient = AppStoreClient.sharedInstance
+        let url = NSURL(string: searchResult.artworkURL100)!
+        searchClient.taskForImage(url, downloadImageCompletionHandler: { (data, error) -> Void in
+            guard error == nil else {
+                print(error)
+                return
+            }
+            let image = UIImage(data: data!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.artworkImageView.image = image
+            })
+        })
+
     }
 }
 
