@@ -10,6 +10,8 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    var landscapeViewController: LandscapeViewController?
+    
     let searchClient = AppStoreClient.sharedInstance
     
     // MARK: IBOutlets and IBActions
@@ -136,6 +138,35 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             let dest = segue.destinationViewController as! DetailViewController
             let indexPath = sender as! NSIndexPath
             dest.searchResult = searchClient.searchResult[indexPath.row]
+        }
+    }
+    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        
+        switch newCollection.verticalSizeClass {
+        case .Compact:
+            showLandscapeViewWithCoordinatot(coordinator)
+        case .Regular, .Unspecified:
+            hideLandscapeViewWithCoordinatot(coordinator)
+        }
+    }
+    
+    func showLandscapeViewWithCoordinatot(coordinator: UIViewControllerTransitionCoordinator){
+        landscapeViewController = storyboard!.instantiateViewControllerWithIdentifier("LandscapeViewController") as? LandscapeViewController
+        if let controller = landscapeViewController {
+            controller.view.frame = view.bounds
+            view.addSubview(controller.view)
+            addChildViewController(controller)
+            controller.didMoveToParentViewController(self)
+        }
+    }
+    
+    func hideLandscapeViewWithCoordinatot(coordinator: UIViewControllerTransitionCoordinator){
+        if let controller = landscapeViewController {
+            controller.didMoveToParentViewController(nil)
+            controller.removeFromParentViewController()
+            controller.view.removeFromSuperview()
         }
     }
 }

@@ -77,7 +77,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663" y="331"/>
+            <point key="canvasLocation" x="668" y="210"/>
+        </scene>
+        <!--Landscape View Controller-->
+        <scene sceneID="qrP-99-U8M">
+            <objects>
+                <viewController storyboardIdentifier="LandscapeViewController" id="vy2-YV-9s1" customClass="LandscapeViewController" customModule="AppStoreSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OPG-d5-BIm"/>
+                        <viewControllerLayoutGuide type="bottom" id="mdm-73-nyP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hfn-mD-c1A">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="this is landscape" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwH-GM-3zp">
+                                <rect key="frame" x="236" y="289" width="128" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dwH-GM-3zp" firstAttribute="centerX" secondItem="hfn-mD-c1A" secondAttribute="centerX" id="PYs-1x-woc"/>
+                            <constraint firstItem="dwH-GM-3zp" firstAttribute="centerY" secondItem="hfn-mD-c1A" secondAttribute="centerY" id="QLZ-WM-MGR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RZb-GN-7GI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="674" y="864"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="n7e-uU-UOg">
