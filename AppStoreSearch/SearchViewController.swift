@@ -155,6 +155,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     func showLandscapeViewWithCoordinatot(coordinator: UIViewControllerTransitionCoordinator){
         landscapeViewController = storyboard!.instantiateViewControllerWithIdentifier("LandscapeViewController") as? LandscapeViewController
         if let controller = landscapeViewController {
+            
+            // must set search result before calling controller.view
+            
+            controller.searchResults = searchClient.searchResult
+            
             controller.view.frame = view.bounds
             view.addSubview(controller.view)
             addChildViewController(controller)
