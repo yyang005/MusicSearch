@@ -24,6 +24,8 @@ class LandscapeViewController: UIViewController {
     
     var firstTime = true
     
+    private var dataTasks = [NSURLSessionDataTask]()
+    
     // MARK: life cycle methods
     
     override func viewDidLoad() {
@@ -55,6 +57,13 @@ class LandscapeViewController: UIViewController {
         if firstTime {
             firstTime = false
             tileButtons(searchResults)
+        }
+    }
+    
+    deinit{
+        print("deinit \(self)")
+        for task in dataTasks {
+            task.cancel()
         }
     }
     
@@ -93,17 +102,16 @@ class LandscapeViewController: UIViewController {
         var row = 0
         var column = 0
         var x = marginX
-        var index = 0
         for searchResult in searchResults {
         
-            let button = UIButton(type: .System)
-            button.backgroundColor = UIColor.whiteColor()
-            button.setTitle("\(index)", forState: .Normal)
-            index++
+            let button = UIButton(type: .Custom)
+            button.setBackgroundImage(UIImage(named: "LandscapeButton"), forState: .Normal)
             button.frame = CGRect(x: x + paddingHorz, y: marginY + CGFloat(row)*itemHeight + paddingVert, width: buttonWidth, height: buttonHeight)
-
+        
             scrollView.addSubview(button)
-            
+        
+            downloadImage(searchResult, button: button)
+        
             ++row
             if row == rowsPerPage {
                 row = 0
@@ -120,6 +128,21 @@ class LandscapeViewController: UIViewController {
         scrollView.contentSize = CGSize(width: CGFloat(numPages) * scrollViewWidth, height: scrollView.bounds.height)
         pageControl.numberOfPages = numPages
         pageControl.currentPage = 0
+    }
+    
+    private func downloadImage(searchResult: SearchResult, button: UIButton){
+        let url = NSURL(string: searchResult.artworkURL60)!
+        let task = AppStoreClient.sharedInstance.taskForImage( url, downloadImageCompletionHandler: { (data, error) -> Void in
+            guard error == nil else {
+                print(error)
+                return
+            }
+            let image = UIImage(data: data!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                button.setImage(image, forState: .Normal)
+            })
+        })
+        dataTasks.append(task)
     }
 }
 

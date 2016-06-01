@@ -111,7 +111,7 @@ class AppStoreClient {
         return url
     }
 
-    func taskForImage(url: NSURL, downloadImageCompletionHandler: (data: NSData?, error: String?) -> Void) -> NSURLSessionTask{
+    func taskForImage(url: NSURL, downloadImageCompletionHandler: (data: NSData?, error: String?) -> Void) -> NSURLSessionDataTask{
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             guard error == nil else {

@@ -11,6 +11,8 @@ import UIKit
 class DetailViewController: UIViewController {
     
     var searchResult: SearchResult!
+    
+    var downloadTask: NSURLSessionDataTask?
 
     // MARK: IBOutlets and IBAction
     
@@ -61,6 +63,11 @@ class DetailViewController: UIViewController {
         }
     }
     
+    deinit {
+        print("deinit \(self)")
+        downloadTask?.cancel()
+    }
+    
     // MARk: update UI
     
     func updateUI() {
@@ -101,7 +108,6 @@ class DetailViewController: UIViewController {
                 self.artworkImageView.image = image
             })
         })
-
     }
 }
 
