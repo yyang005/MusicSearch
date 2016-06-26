@@ -72,10 +72,10 @@ class DetailViewController: UIViewController {
     
     func updateUI() {
         nameLabel.text = searchResult.name
-        if searchResult.artistName.isEmpty {
-            artistNameLabel.text = "Unknown"
+        if let artistName = searchResult.artistName {
+            artistNameLabel.text = artistName
         }else {
-            artistNameLabel.text = searchResult.artistName
+            artistNameLabel.text = "Unknown"
         }
         kindLabel.text = searchResult.kind
         genreLabel.text = searchResult.genre

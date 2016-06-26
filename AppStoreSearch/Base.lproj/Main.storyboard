@@ -37,19 +37,6 @@
                                 <items>
                                     <navigationItem id="yoi-ze-4QW">
                                         <nil key="title"/>
-                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="zSO-0d-IJk">
-                                            <rect key="frame" x="150" y="7" width="300" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="All"/>
-                                                <segment title="Music"/>
-                                                <segment title="Software"/>
-                                                <segment title="E-books"/>
-                                            </segments>
-                                            <connections>
-                                                <action selector="segmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pjN-3O-Ifa"/>
-                                            </connections>
-                                        </segmentedControl>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -70,7 +57,6 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="faO-rm-WI1" id="wem-h6-UUO"/>
-                        <outlet property="segmentedControl" destination="zSO-0d-IJk" id="LAG-03-dQN"/>
                         <outlet property="tableView" destination="N1C-xJ-cIy" id="iLd-Wu-ahY"/>
                         <segue destination="Jgz-29-ftS" kind="presentation" identifier="ShowDetail" id="pW6-qe-8Vf"/>
                     </connections>

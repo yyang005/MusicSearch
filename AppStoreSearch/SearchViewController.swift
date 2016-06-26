@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
     var landscapeViewController: LandscapeViewController?
     
@@ -20,38 +21,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
-    
-    @IBAction func segmentChanged(sender: UISegmentedControl) {
-        let term = searchBar.text!
-        if term == "" {
-            return
-        }
-
-        let entityName = entityFromIndex(sender.selectedSegmentIndex)
-        searchClient.performSearch(term, entity: entityName) { (error) -> Void in
-            guard error == nil else {
-                print(error!)
-                return
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-            })
-        }
-    }
-    
-    func entityFromIndex(index: Int) -> String?{
-        var entityName: String?
-        switch index {
-            case 1: entityName = "musicTrack"
-            case 2: entityName = "software"
-            case 3: entityName = "ebook"
-            default: break
-        }
-        return entityName
-    }
     
     // MARK: life cycle methods
     
@@ -66,6 +35,33 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         let newNib = UINib(nibName: "SearchResultCell", bundle: nil)
         tableView.registerNib(newNib, forCellReuseIdentifier: "SearchResultCell")
         
+        // fetch results
+        
+        do {
+            try fetchedResultsController.performFetch()
+        }catch(let error) {
+            let error = error as NSError
+            print(error.description)
+        }
+        fetchedResultsController.delegate = self
+    }
+    
+    //MARK: CoreData convenience methods
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let fetchRequest = NSFetchRequest(entityName: "SearchResult")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }()
+    
+    lazy var sharedContext: NSManagedObjectContext = {
+        return CoreDataStackManager.sharedInstance().managedObjectContext
+    }()
+    
+    func saveContext(){
+        CoreDataStackManager.sharedInstance().saveContext()
     }
     
     // MARK: search bar delegate
@@ -74,12 +70,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar.resignFirstResponder()
         
         let term = searchBar.text!
-        searchClient.performSearch(term, entity: nil) { (error) -> Void in
+        searchClient.performSearch(term, entity: "musicTrack") { (jsonResults, error) -> Void in
             guard error == nil else {
-                print(error!)
+                self.alert(error!)
                 return
             }
             
+            // Get a Swift dictionary from the JSON data
+            let dictionary = jsonResults as! [String: AnyObject]
+            if let dicArray = dictionary["results"] as? [[String: AnyObject]] {
+                for dic in dicArray {
+                    _ = SearchResult(dictionary: dic, context: self.sharedContext)
+                }
+            }else{
+                self.alert("cannot find the key: results")
+            }
+            self.saveContext()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
             })
@@ -93,33 +99,34 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     // MARK: table view data source methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let searchResults = searchClient.searchResult
-        return searchResults.count
+        let sectionInfo = fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellReuseIdentifier = "SearchResultCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! SearchResultCell
         
-        let searchResults = searchClient.searchResult
-        if searchResults.count == 0 {
-            cell.nameLabel.text = "Nothing Found"
-        }else {
-            let result = searchResults[indexPath.row]
-            cell.nameLabel.text = result.name
-            cell.artistNameLabel.text = result.artistName
-            
-            let url = NSURL(string: result.artworkURL60)!
-            searchClient.taskForImage(url, downloadImageCompletionHandler: { (data, error) -> Void in
-                guard error == nil else {
-                    print(error)
-                    return
-                }
-                let image = UIImage(data: data!)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    cell.artworkImageView.image = image
+        if let searchResults = fetchedResultsController.fetchedObjects as? [SearchResult] {
+            if searchResults.count == 0 {
+                cell.nameLabel.text = "Nothing Found"
+            }else {
+                let result = searchResults[indexPath.row]
+                cell.nameLabel.text = result.name
+                cell.artistNameLabel.text = result.artistName
+                
+                let url = NSURL(string: result.artworkURL60)!
+                searchClient.taskForImage(url, downloadImageCompletionHandler: { (data, error) -> Void in
+                    guard error == nil else {
+                        print(error)
+                        return
+                    }
+                    let image = UIImage(data: data!)
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        cell.artworkImageView.image = image
+                    })
                 })
-            })
+            }
         }
         return cell
     }
@@ -131,13 +138,52 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         performSegueWithIdentifier("ShowDetail", sender: indexPath)
     }
     
+    // MARK: fetched results controller delegate methods
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?){
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .Update:
+            let cell = tableView.cellForRowAtIndexPath(indexPath!) as! SearchResultCell
+            let result = fetchedResultsController.objectAtIndexPath(indexPath!) as! SearchResult
+            configueCell(cell, withSearchResult: result)
+        case .Move:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        switch type {
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
+
+    
     // MARK: prepare for segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
             let dest = segue.destinationViewController as! DetailViewController
             let indexPath = sender as! NSIndexPath
-            dest.searchResult = searchClient.searchResult[indexPath.row]
+            
+            dest.searchResult = fetchedResultsController.objectAtIndexPath(indexPath) as! SearchResult
         }
     }
     
@@ -158,7 +204,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             
             // must set search result before calling controller.view
             
-            controller.searchResults = searchClient.searchResult
+            controller.searchResults = fetchedResultsController.fetchedObjects as! [SearchResult]
             
             controller.view.frame = view.bounds
             view.addSubview(controller.view)
@@ -173,6 +219,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             controller.removeFromParentViewController()
             controller.view.removeFromSuperview()
         }
+    }
+    
+    func configueCell(cell: SearchResultCell, withSearchResult: SearchResult){
+        cell.nameLabel.text = withSearchResult.name
+        cell.artistNameLabel.text = withSearchResult.artistName
     }
 }
 
