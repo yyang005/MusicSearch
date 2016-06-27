@@ -138,6 +138,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         performSegueWithIdentifier("ShowDetail", sender: indexPath)
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        switch (editingStyle) {
+        case .Delete:
+            let result = fetchedResultsController.objectAtIndexPath(indexPath) as! SearchResult
+            
+            // Remove the search result from the context
+            sharedContext.deleteObject(result)
+            CoreDataStackManager.sharedInstance().saveContext()
+        default:
+            break
+        }
+    }
+
+    
     // MARK: fetched results controller delegate methods
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
