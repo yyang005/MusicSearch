@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: life cycle methods
     
@@ -41,7 +42,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             try fetchedResultsController.performFetch()
         }catch(let error) {
             let error = error as NSError
-            print(error.description)
+            alert(error.description)
         }
         fetchedResultsController.delegate = self
     }
@@ -70,7 +71,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
         searchBar.resignFirstResponder()
         
         let term = searchBar.text!
+        activityIndicator.startAnimating()
+        if fetchedResultsController.fetchedObjects?.count > 0 {
+            for music in fetchedResultsController.fetchedObjects as! [SearchResult] {
+                sharedContext.deleteObject(music)
+            }
+        }
         searchClient.performSearch(term, entity: "musicTrack") { (jsonResults, error) -> Void in
+            self.activityIndicator.stopAnimating()
             guard error == nil else {
                 self.alert(error!)
                 return
@@ -79,6 +87,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             // Get a Swift dictionary from the JSON data
             let dictionary = jsonResults as! [String: AnyObject]
             if let dicArray = dictionary["results"] as? [[String: AnyObject]] {
+                if dicArray.count == 0 {
+                    self.alert("No results for \(term)")
+                    return
+                }
                 for dic in dicArray {
                     _ = SearchResult(dictionary: dic, context: self.sharedContext)
                 }

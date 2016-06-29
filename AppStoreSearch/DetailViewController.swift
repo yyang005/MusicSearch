@@ -99,11 +99,13 @@ class DetailViewController: UIViewController {
         let searchClient = AppStoreClient.sharedInstance
         let url = NSURL(string: searchResult.artworkURL100)!
         searchClient.taskForImage(url, downloadImageCompletionHandler: { (data, error) -> Void in
-            guard error == nil else {
-                print(error)
-                return
+            
+            var image: UIImage?
+            if let data = data {
+                image = UIImage(data: data)
+            }else{
+                image = UIImage(named: "Placeholder")
             }
-            let image = UIImage(data: data!)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.artworkImageView.image = image
             })
