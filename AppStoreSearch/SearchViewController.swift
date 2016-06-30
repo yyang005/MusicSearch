@@ -22,7 +22,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     // MARK: life cycle methods
     
     override func viewDidLoad() {
