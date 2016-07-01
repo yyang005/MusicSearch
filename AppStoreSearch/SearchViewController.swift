@@ -77,7 +77,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             }
         }
         searchClient.performSearch(term, entity: "musicTrack") { (jsonResults, error) -> Void in
-            self.activityIndicator.stopAnimating()
+            
             guard error == nil else {
                 self.alert(error!)
                 return
@@ -99,6 +99,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, UITableViewDa
             self.saveContext()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
             })
         }
     }

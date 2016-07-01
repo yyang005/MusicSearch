@@ -35,7 +35,7 @@ class AppStoreClient {
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             guard error == nil else {
-                completionHandlerForGet(results: nil, error: error!.description)
+                completionHandlerForGet(results: nil, error: error!.localizedDescription)
                 return
             }
             
@@ -84,7 +84,7 @@ class AppStoreClient {
         let request = NSURLRequest(URL: url)
         let task = session.dataTaskWithRequest(request) { (data, response, error) -> Void in
             guard error == nil else {
-                downloadImageCompletionHandler(data: nil, error: error!.description)
+                downloadImageCompletionHandler(data: nil, error: error!.localizedDescription)
                 return
             }
             downloadImageCompletionHandler(data: data, error: nil)
